@@ -1,0 +1,25 @@
+version: 1.0.0
+name: Hello
+services:
+- name: sanity-studio
+  github:
+    branch: main
+    deploy_on_push: true
+  build_command: npm install && npm run build
+  run_command: npm start
+  source_dir: ./studio
+  environment:
+    SANITY_STUDIO_API_PROJECT_ID: ${SANITY_PROJECT_ID}
+    SANITY_STUDIO_API_DATASET: ${SANITY_DATASET}
+
+- name: site-engine
+  github:
+    branch: main
+    deploy_on_push: true
+  build_command: npm install && npm run build
+  run_command: npm start
+  source_dir: ./site-engine
+  environment:
+    SANITY_PROJECT_ID: ${SANITY_PROJECT_ID}
+    SANITY_DATASET: ${SANITY_DATASET}
+    SANITY_API_TOKEN: ${SANITY_API_TOKEN}
